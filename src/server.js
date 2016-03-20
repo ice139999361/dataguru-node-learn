@@ -7,8 +7,16 @@
 
 import path from 'path';
 import ProjectCore from 'project-core';
+import createDebug from 'debug';
 
 const $ = global.$ = new ProjectCore();
+
+
+// 创建 Debug 函数
+$.createDebug = function (name) {
+  return createDebug('my:' + name);
+}
+const debug = $.createDebug('server');
 
 
  // 加载配置文件
@@ -16,6 +24,7 @@ $.init.add((done) => {
   $.config.load(path.resolve(__dirname, 'config.js'));
   const env = process.env.NODE_ENV || null;
   if (env) {
+    debug('load env: %s', env);
     $.config.load(path.resolve(__dirname, '../config', env + '.js'));
   }
   $.env = env;
@@ -41,11 +50,4 @@ $.init((err) => {
   } else {
     console.log('inited');
   }
-
-  const item = new $.model.User({
-    name: `User${$.utils.date('YmdHis')}`,
-    password: '123456',
-    nickname: '测试用户'
-  });
-  item.save(console.log);
 });
