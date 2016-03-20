@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "project-core": "^0.0.16",
-    "mongoose": "^4.4.8"
+    "mongoose": "^4.4.8",
+    "express": "^4.13.4",
+    "serve-static": "^1.10.2",
+    "body-parser": "^1.15.0",
+    "multiparty": "^4.1.2"
   }
 }
