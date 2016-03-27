@@ -44,6 +44,10 @@ module.exports = function (done) {
 
   app.use(router);
   app.use('/static', serveStatic(path.resolve(__dirname, '../../static')));
+  app.use('/api', function (err, req, res, next) {
+    debug('API error: %s', err && err.stack || err);
+    res.json({error: err.toString()});
+  });
 
 console.log($.config.get('web.port'));
   app.listen($.config.get('web.port'), (err) => {
