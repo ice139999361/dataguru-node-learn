@@ -37,8 +37,8 @@ module.exports = function (done) {
     name: {validate: (v) => validator.isLength(v, {min:4, max:20}) && /^[a-zA-Z]/.test(v)},
     email: {validate: (v) => validator.isEmail(v)}
   });
-
   $.method('user.get').register(async function (params, callback) {
+    console.log(112233)
     const query = {};
     if (params._id) {
       query._id = params._id;
