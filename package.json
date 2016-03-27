@@ -17,6 +17,7 @@
     "serve-static": "^1.10.2",
     "body-parser": "^1.15.0",
     "multiparty": "^4.1.2",
-    "debug": "^2.2.0"
+    "debug": "^2.2.0",
+    "validator": "^5.1.0"
   }
 }
