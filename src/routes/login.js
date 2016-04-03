@@ -30,7 +30,7 @@ module.exports = function (done) {
     res.json({success: true, token: req.session.logout_token});
   });
 
-  $.router.post('/api/logout', async function (req, res, next) {
+  $.router.get('/api/logout', async function (req, res, next) {
     if (req.session.logout_token && req.query.token != req.session.logout_token) {
       return next(new Error('invalid token'));
     }
