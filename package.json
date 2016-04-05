@@ -3,12 +3,13 @@
     "watch": "npm run clean && babel src -d target --watch",
     "compile": "npm run clean && babel src -d target",
     "clean": "rm -Rf target",
-    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && node target/server.js"
+    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && nodemon target/server.js"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-preset-es2015-node4": "^2.0.3"
+    "babel-preset-es2015-node4": "^2.0.3",
+    "nodemon": "^1.9.1"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
