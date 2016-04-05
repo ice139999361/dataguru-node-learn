@@ -85,7 +85,6 @@ module.exports = function (done) {
   });
   $.method('topic.comment.add').register(async function (params) {
     const comment = {
-      cid: new $.utils.ObjectId(),
       authorId: params.authorId,
       content: params.content,
       createdAt: new Date()
@@ -106,7 +105,7 @@ module.exports = function (done) {
     return $.model.Topic.findOne(
       {
         _id: params._id,
-        'comments.cid': params.cid
+        'comments._id': params.cid
       }, {
         'authorId': 1,
         'comments.$': 1
@@ -122,7 +121,7 @@ module.exports = function (done) {
 
     return $.model.Topic.update({_id: params._id}, {
       $pull: {
-        comments: {cid: params.cid}
+        comments: {_id: params.cid}
       }
     })
   });
