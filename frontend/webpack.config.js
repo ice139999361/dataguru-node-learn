@@ -44,7 +44,10 @@ module.exports = {
         stats: {
             colors: true
         },
-        hot: true
+        hot: true,
+        proxy: {
+          '/api/*': 'http://127.0.0.1:3001'
+        }
     },
     babel: {
         presets: ['react', 'es2015']
