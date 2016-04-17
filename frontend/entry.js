@@ -2,16 +2,9 @@ import 'bootstrap-webpack';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-console.log('hello. world');
+import App from './App';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, World ++++</h1>
-      </div>
-    );
-  }
-}
+
+console.log('hello. world');
 
 ReactDOM.render(<App />, document.body)
