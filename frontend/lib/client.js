@@ -3,7 +3,7 @@ import browserRequest from 'browser-request';
 
 const urlBase = '/api/';
 
-export function request(method, path, data) {
+export function request(method, path, data={}) {
   return new Promise((resolve, reject) => {
     method = method.toUpperCase();
     const options = {
@@ -37,4 +37,45 @@ export function request(method, path, data) {
 
 export function getTopicList(options) {
   return request('get', 'topic/list', {});
+}
+
+export function getTopicDetail(id) {
+  return request('get', `topic/item/${id}`).then(ret => ret.topic);
+}
+
+export function addTopic(options) {
+  return request ('post', 'topic/add', options);
+}
+
+export function updateTopic(topic_id, options) {
+  return request ('post', `topic/item/${topic_id}`, options);
+}
+
+export function addTopic(options) {
+  return request ('post', 'topic/add');
+}
+
+export function deleteTopic(topic_id) {
+  return request ('delete', `topic/item/${topic_id}`);
+}
+
+export function addTopicComment(topic_id, options) {
+  return request ('post', `topic/item/${topic_id}/comment/add`);
+}
+
+
+export function getLoginUser() {
+  return request('get', 'login_user');
+}
+
+export function login(options) {
+  return request('post', 'login', options);
+}
+
+export function logout(token) {
+  return request('get', `/api/logout?token=${token}`)
+}
+
+export function signup(options) {
+  return request('post', 'signup', options)
 }
