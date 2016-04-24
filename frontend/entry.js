@@ -1,15 +1,19 @@
 import 'bootstrap-webpack';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, Link, browserHistory} from 'react-router';
 
 import App from './App';
-import {getTopicList} from './lib/client';
+import TopicDetail from './component/TopicDetail';
 
-getTopicList({})
-  .then(ret => console.log(ret))
-  .catch(err => console.error(err))
+const e = document.createElement('div');
+e.id = 'app';
+document.body.appendChild(e);
 
-
-console.log('hello. world');
-
-ReactDOM.render(<App />, document.body)
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <Route path="/topic/:id" component={TopicDetail} />
+    </Route>
+  </Router>
+), e);
