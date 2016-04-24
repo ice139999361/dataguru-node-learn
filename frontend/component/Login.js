@@ -2,6 +2,7 @@ import React from 'react';
 import jQuery from 'jquery';
 
 import {login} from '../lib/client';
+import {redirectURL} from '../lib/utils';
 
 export default class Login extends React.Component {
 
@@ -21,7 +22,7 @@ export default class Login extends React.Component {
       .then(ret => {
         $bin.button('reset');
         alert('登录成功');
-        location.replace('/');
+        redirectURL('/')
       })
       .catch(err => {
         $bin.button('reset');
