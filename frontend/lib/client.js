@@ -43,16 +43,12 @@ export function getTopicDetail(id) {
   return request('get', `topic/item/${id}`).then(ret => ret.topic);
 }
 
-export function addTopic(options) {
-  return request ('post', 'topic/add', options);
+export function addTopic(title, tags, content) {
+  return request ('post', 'topic/add', {title, tags, content}).then(ret => ret.topic);
 }
 
 export function updateTopic(topic_id, options) {
   return request ('post', `topic/item/${topic_id}`, options);
-}
-
-export function addTopic(options) {
-  return request ('post', 'topic/add');
 }
 
 export function deleteTopic(topic_id) {
