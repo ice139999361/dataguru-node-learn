@@ -64,16 +64,16 @@ export function addTopicComment(topic_id, options) {
 }
 
 
-export function getLoginUser() {
-  return request('get', 'login_user');
+export function loginUser() {
+  return request('get', 'login_user').then(ret => ret.user);
 }
 
-export function login(options) {
-  return request('post', 'login', options);
+export function login(name, password) {
+  return request('post', 'login', {name, password});
 }
 
-export function logout(token) {
-  return request('get', `/api/logout?token=${token}`)
+export function logout() {
+  return request('post', 'logout');
 }
 
 export function signup(options) {

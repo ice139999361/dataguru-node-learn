@@ -1,8 +1,28 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+import {loginUser, logout} from '../lib/client';
+
 
 export default class Header extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    loginUser()
+      .then(user => this.setState({user}))
+      .catch(err => console.error(err));
+  }
+
+  handleLogout() {
+    logout()
+      .then(user => location.reload())
+      .catch(err => console.error(err));
+  }
+
   render() {
     return(
       <nav className="navbar navbar-default">
@@ -25,7 +45,12 @@ export default class Header extends React.Component {
               <li><a href="#">帮助</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
+              {this.state.user ? (
+                <li><a onClick={this.handleLogout.bind(this)}>注销 [{this.state.user.nickname}]</a></li>
+              ) : (
+                <li><a href="/login">登录</a></li>
+              )}
+
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
                 <ul className="dropdown-menu">
