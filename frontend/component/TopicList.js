@@ -23,7 +23,10 @@ export default class TopicList extends React.Component {
       <ul className="list-group">
         {list.map((item, i) => {
           return(
-            <Link to={`/topic/${item._id}`} className="list-group-item" key={i}>{item.title}</Link>
+            <li  className="list-group-item" key={i}>
+              <Link to={`/topic/${item._id}`}>{item.title}</Link>
+              <Link to={`/topic/${item._id}/edit`}>修改</Link>
+            </li>
           )
         })}
       </ul>
