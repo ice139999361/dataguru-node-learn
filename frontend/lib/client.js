@@ -47,8 +47,8 @@ export function addTopic(title, tags, content) {
   return request ('post', 'topic/add', {title, tags, content}).then(ret => ret.topic);
 }
 
-export function editTopic(topic_id, title, tags, content) {
-  return request ('post', `topic/item/${topic_id}`, {topic_id, title, tags, content}).then(ret => ret.topic);
+export function updateTopic(id, title, tags, content) {
+  return request ('post', `topic/item/${id}`, {id, title, tags, content}).then(ret => ret.topic);
 }
 
 export function deleteTopic(topic_id) {
