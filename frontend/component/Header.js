@@ -34,7 +34,7 @@ export default class Header extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">简单论坛系统 </a>
+            <Link className="navbar-brand" to="#">简单论坛系统 </Link>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,26 +42,18 @@ export default class Header extends React.Component {
               <li className="active">
                 <Link to="/">首页 <span className="sr-only">(current)</span></Link>
               </li>
-              <li><a href="/new"><i className="glyphicon glyphicon-plus"></i>发帖</a></li>
+              <li><Link to="/new"><i className="glyphicon glyphicon-plus"></i>发帖</Link></li>
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-              {this.state.user ? (
+            {this.state.user ? (
+              <ul className="nav navbar-nav navbar-right">
                 <li><a onClick={this.handleLogout.bind(this)}>注销 [{this.state.user.nickname}]</a></li>
-              ) : (
-                <li><a href="/login">登录</a></li>
-              )}
-
-              <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                <ul className="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </li>
-            </ul>
+              </ul>
+            ) : (
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link to="/login">登录</Link></li>
+                <li><Link to="/signup">注册</Link></li>
+              </ul>
+            )}
           </div>
         </div>
       </nav>

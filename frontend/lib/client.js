@@ -75,6 +75,6 @@ export function logout() {
   return request('post', 'logout');
 }
 
-export function signup(options) {
-  return request('post', 'signup', options)
+export function signup(name, email, password, nickname) {
+  return request('post', 'signup', {name, email, password, nickname})
 }
