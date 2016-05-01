@@ -55,10 +55,13 @@ export function deleteTopic(topic_id) {
   return request ('delete', `topic/item/${topic_id}`);
 }
 
-export function addTopicComment(topic_id, options) {
-  return request ('post', `topic/item/${topic_id}/comment/add`);
+export function addComment(id, content) {
+  return request ('post', `topic/item/${id}/comment/add`, {content}).then(ret => ret.comment);
 }
 
+export function deleteComment(id, cid) {
+  return request ('post', `topic/item/${id}/comment/delete`, {cid});
+}
 
 export function loginUser() {
   return request('get', 'login_user').then(ret => ret.user);
