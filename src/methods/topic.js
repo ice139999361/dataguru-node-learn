@@ -28,7 +28,7 @@ module.exports = function (done) {
     _id: {required: true, validate: (v) => validator.isMongoId(v) }
   });
   $.method('topic.get').register(async function(params) {
-    return $.model.Topic.findOne({_id: params._id});
+    return $.model.Topic.findTopicById({_id: params._id});
   });
 
   $.method('topic.list').check({
@@ -55,6 +55,19 @@ module.exports = function (done) {
     if (params.limit) ret.limit(Number(params.limit));
 
     return ret;
+  });
+
+
+  $.method('topic.count').check({
+    authorId: {validate: (v) => validator.isMongoId(v)},
+    tags: {validate: (v) => Array.isArray(v)},
+  });
+  $.method('topic.count').register(async function(params) {
+    const query = {};
+    if (params.authorId) query.authorId  = params.authorId;
+    if (params.tags) query.tags = {$all: params.tags};
+
+    return $.model.Topic.count(query);
   });
 
   $.method('topic.delete').check({
