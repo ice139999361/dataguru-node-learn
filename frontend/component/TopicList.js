@@ -11,25 +11,62 @@ export default class TopicList extends React.Component {
   }
 
   componentDidMount() {
-    getTopicList({})
-      .then(ret => this.setState({list: ret.list}))
+    this.updateList({
+      tag: this.props.location.query.tags,
+      page: this.props.location.query.page,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateList({
+      tags: nextProps.location.query.tags,
+      page: nextProps.location.query.page,
+    });
+  }
+
+  updateList(query) {
+    getTopicList(query)
+      .then(ret => this.setState(ret))
       .catch(err => console.error(err));
   }
 
   render() {
     const list = Array.isArray(this.state.list) ? this.state.list : [];
+    let page = parseInt(this.state.page, 10);
+    if (!(page > 1)) page = 1;
+
+    let prevPage = page - 1;
+    if (prevPage < 1) prevPage = 1;
+
+    let nextPage = page + 1;
+
+
     return(
       <div>
-      <ul className="list-group">
-        {list.map((item, i) => {
-          return(
-            <li  className="list-group-item" key={i}>
-              <Link to={`/topic/${item._id}`}>{item.title}</Link>
-              <Link to={`/topic/${item._id}/edit`}>修改</Link>
+        <ul className="list-group">
+          {list.map((item, i) => {
+            return(
+              <li  className="list-group-item" key={i}>
+                <Link to={`/topic/${item._id}`}>{item.title}</Link>
+                <Link to={`/topic/${item._id}/edit`}>修改</Link>
+              </li>
+            )
+          })}
+        </ul>
+        <nav>
+          <ul className="pagination">
+            <li>
+              <Link to={`/?page=${prevPage}`} aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </Link>
             </li>
-          )
-        })}
-      </ul>
+            <li>
+              <Link to={`/?page=${nextPage}`} aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     )
   }
